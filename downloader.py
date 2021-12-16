@@ -2,12 +2,17 @@
 # Created by r0tt3n-m3m0ry
 
 try:
-    import youtube_dl
+    import yt_dlp
     import plyer # Notifications
 except:
     print('You have to install requirement modules via \'$ pip3 install -r requirements.txt\' before run this script.'); exit()
 
 import os
+
+if os.name == 'nt':
+    pythonpath = 'python'
+else:
+    pythonpath = 'python3'
 
 try:   
     with open(input('Enter name of file which contain the videos data: ')) as file_with_links:
@@ -31,9 +36,9 @@ try:
                 os.chdir(f'{video_category}\\{author}') if os.name == 'nt' else os.chdir(f'{video_category}/{author}')
 
                 if content_type == 'audio':
-                    os.system(f"youtube-dl -i -f best --extract-audio --embed-thumbnail --audio-format mp3 {link}")
+                    os.system(f"{pythonpath} -m yt_dlp -i -f best --extract-audio --embed-thumbnail --audio-format mp3 {link}")
                 elif content_type == 'video':
-                    os.system(f"youtube-dl -i -f best {link}")
+                    os.system(f"{pythonpath} -m yt_dlp -i -f best {link}")
                 else:
                     pass
 
